@@ -2,6 +2,7 @@ INCDIR = include/ardealte
 SRCDIR = src/ardealte
 _OBJDIR = obj
 OBJDIR := $(_OBJDIR)/ardealte
+BINDIR = bin
 
 MKDIR_P = mkdir -p
 
@@ -25,10 +26,13 @@ $(OBJS): | $(OBJDIR)
 $(OBJDIR):
 	$(MKDIR_P) $(OBJDIR)
 
-ardealte: $(OBJS)
-	$(LINK) -o $@ $^
+$(BINDIR):
+	$(MKDIR_P) $(BINDIR)
+
+ardealte: $(OBJS) | $(BINDIR)
+	$(LINK) -o $(BINDIR)/$@ $^
 
 .PHONY: clean
 
 clean:
-	rm -rf $(_OBJDIR)
+	rm -rf $(_OBJDIR) $(BINDIR)
