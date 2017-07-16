@@ -1,7 +1,7 @@
 #ifndef PUZZLE_H
 #define PUZZLE_H
 
-#include "tile.h"
+#include "../../include/ardealte/tile.h"
 
 class Puzzle {
 

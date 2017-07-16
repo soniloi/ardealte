@@ -1,4 +1,4 @@
-#include "tile.h"
+#include "../../include/ardealte/tile.h"
 
 Tile::Tile() {
 	this->open = false;
