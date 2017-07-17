@@ -7,7 +7,7 @@ BINDIR = bin
 MKDIR_P = mkdir -p
 
 LFLAGS = -Wall
-CFLAGS = -Wall -c -O0 --std=c++11 -g
+CFLAGS = -Wall -c -O0 --std=c++11 -g -I$(shell pwd)/include
 CXX = clang++
 COMPILE = $(CXX) $(CFLAGS)
 LINK = $(CXX) $(LFLAGS)

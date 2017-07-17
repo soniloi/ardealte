@@ -2,7 +2,7 @@
 #define PUZZLE_H
 
 #include <vector>
-#include "../../include/ardealte/tile.h"
+#include "ardealte/tile.h"
 
 class Puzzle {
 

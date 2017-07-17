@@ -1,7 +1,7 @@
 #include <sstream>
 
 #include "gtest/gtest.h"
-#include "../../../include/ardealte/puzzle.h"
+#include "ardealte/puzzle.h"
 
 TEST(PuzzleTest, InitAllFalse) {
 	const int size = 5;

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "../../include/ardealte/puzzle.h"
+#include "ardealte/puzzle.h"
 
 Puzzle::Puzzle(unsigned int size, bool * pattern) {
 

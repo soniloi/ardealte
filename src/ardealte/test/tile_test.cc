@@ -1,7 +1,7 @@
 #include <sstream>
 
 #include "gtest/gtest.h"
-#include "../../../include/ardealte/tile.h"
+#include "ardealte/tile.h"
 
 TEST(TileTest, InitNotOpen) {
 	Tile tile(false);

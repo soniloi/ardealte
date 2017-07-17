@@ -1,4 +1,4 @@
-#include "../../include/ardealte/tile.h"
+#include "ardealte/tile.h"
 
 const std::string Tile::DISPLAY_OPEN = "[ ]";
 const std::string Tile::DISPLAY_CLOSED = "|||";

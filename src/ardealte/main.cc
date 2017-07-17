@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include "../../include/ardealte/main.h"
-#include "../../include/ardealte/puzzle.h"
+#include "ardealte/main.h"
+#include "ardealte/puzzle.h"
 
 int main() {
 
