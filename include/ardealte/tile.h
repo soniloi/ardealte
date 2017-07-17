@@ -6,6 +6,8 @@
 class Tile {
 
 private:
+	static const std::string DISPLAY_CLOSED;
+	static const std::string DISPLAY_OPEN;
 	bool open;
 
 public:
