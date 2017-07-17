@@ -1,7 +1,7 @@
 #include "../../include/ardealte/tile.h"
 
-Tile::Tile() {
-	this->open = false;
+Tile::Tile(bool open) {
+	this->open = open;
 }
 
 bool Tile::isOpen() {

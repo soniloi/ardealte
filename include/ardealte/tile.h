@@ -7,7 +7,7 @@ private:
 	bool open;
 
 public:
-	Tile();
+	Tile(bool open);
 	bool isOpen();
 	void setOpen(bool open);
 };

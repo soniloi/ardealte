@@ -3,29 +3,22 @@
 
 #include "../../include/ardealte/puzzle.h"
 
-Puzzle::Puzzle(unsigned int size) {
+Puzzle::Puzzle(unsigned int size, bool ** pattern) {
 
 	this->size = size;
 
-	this->tiles = new Tile*[size];
 	for (unsigned int i = 0; i < size; ++i) {
-		this->tiles[i] = new Tile[size]();
+		this->tiles.push_back(std::vector<Tile>());
+
+		for (unsigned int j = 0; j < size; ++j) {
+
+			Tile tile(pattern[i][j]);
+			this->tiles[i].push_back(tile);
+		}
 	}
 }
 
 Puzzle::~Puzzle() {
-	for (unsigned int i = 0; i < this->size; ++i) {
-		delete [] this->tiles[i];
-	}
-	delete [] this->tiles;
-}
-
-void Puzzle::init(bool ** pattern) {
-	for (unsigned int i = 0; i < this->size; ++i) {
-		for (unsigned int j = 0; j < this->size; ++j) {
-			this->tiles[i][j].setOpen(pattern[i][j]);
-		}
-	}
 }
 
 void Puzzle::print() {
@@ -33,7 +26,7 @@ void Puzzle::print() {
 		for (unsigned int j = 0; j < this->size; ++j) {
 
 			std::string display = "|||";
-			if (tiles[i][j].isOpen()) {
+			if (this->tiles[i][j].isOpen()) {
 				display = "[ ]";
 			}
 

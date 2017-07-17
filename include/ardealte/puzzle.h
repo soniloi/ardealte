@@ -1,18 +1,18 @@
 #ifndef PUZZLE_H
 #define PUZZLE_H
 
+#include <vector>
 #include "../../include/ardealte/tile.h"
 
 class Puzzle {
 
 private:
 	unsigned int size;
-	Tile ** tiles;
+	std::vector<std::vector<Tile>> tiles;
 
 public:
-	Puzzle(unsigned int size);
+	Puzzle(unsigned int size, bool ** pattern);
 	~Puzzle();
-	void init(bool ** pattern);
 	void print();
 };
 
