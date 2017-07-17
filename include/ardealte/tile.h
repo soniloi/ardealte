@@ -9,6 +9,7 @@ private:
 public:
 	Tile();
 	bool isOpen();
+	void setOpen(bool open);
 };
 
 #endif

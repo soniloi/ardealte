@@ -7,3 +7,7 @@ Tile::Tile() {
 bool Tile::isOpen() {
 	return this->open;
 }
+
+void Tile::setOpen(bool open) {
+	this->open = open;
+}

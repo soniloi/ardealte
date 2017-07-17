@@ -12,6 +12,7 @@ private:
 public:
 	Puzzle(unsigned int size);
 	~Puzzle();
+	void init(bool ** pattern);
 	void print();
 };
 

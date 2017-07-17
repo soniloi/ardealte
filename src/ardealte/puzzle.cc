@@ -20,6 +20,14 @@ Puzzle::~Puzzle() {
 	delete [] this->tiles;
 }
 
+void Puzzle::init(bool ** pattern) {
+	for (unsigned int i = 0; i < this->size; ++i) {
+		for (unsigned int j = 0; j < this->size; ++j) {
+			this->tiles[i][j].setOpen(pattern[i][j]);
+		}
+	}
+}
+
 void Puzzle::print() {
 	for (unsigned int i = 0; i < this->size; ++i) {
 		for (unsigned int j = 0; j < this->size; ++j) {
