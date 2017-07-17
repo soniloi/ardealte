@@ -15,7 +15,8 @@ int main() {
 	};
 
 	Puzzle puzzle(size, pattern);
-	puzzle.print();
+
+	std::cout << puzzle << std::endl;
 
 	delete [] pattern;
 

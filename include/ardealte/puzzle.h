@@ -13,7 +13,7 @@ private:
 public:
 	Puzzle(unsigned int size, bool * pattern);
 	~Puzzle();
-	void print();
+	friend std::ostream& operator <<(std::ostream &stream, const Puzzle& puzzle);
 };
 
 #endif

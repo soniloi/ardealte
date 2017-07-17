@@ -21,17 +21,16 @@ Puzzle::Puzzle(unsigned int size, bool * pattern) {
 Puzzle::~Puzzle() {
 }
 
-void Puzzle::print() {
-	for (unsigned int i = 0; i < this->size; ++i) {
-		for (unsigned int j = 0; j < this->size; ++j) {
+std::ostream& operator <<(std::ostream& stream, const Puzzle& puzzle) {
 
-			std::string display = "|||";
-			if (this->tiles[i][j].isOpen()) {
-				display = "[ ]";
-			}
+	for (unsigned int i = 0; i < puzzle.size; ++i) {
 
-			std::cout << display;
+		for (unsigned int j = 0; j < puzzle.size; ++j) {
+			stream << puzzle.tiles[i][j];
 		}
-		std::cout << std::endl;
+
+		stream << std::endl;
 	}
+
+	return stream;
 }
