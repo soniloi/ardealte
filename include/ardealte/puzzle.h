@@ -11,7 +11,7 @@ private:
 	std::vector<std::vector<Tile>> tiles;
 
 public:
-	Puzzle(unsigned int size, bool ** pattern);
+	Puzzle(unsigned int size, bool * pattern);
 	~Puzzle();
 	void print();
 };

@@ -3,7 +3,7 @@
 
 #include "../../include/ardealte/puzzle.h"
 
-Puzzle::Puzzle(unsigned int size, bool ** pattern) {
+Puzzle::Puzzle(unsigned int size, bool * pattern) {
 
 	this->size = size;
 
@@ -12,7 +12,7 @@ Puzzle::Puzzle(unsigned int size, bool ** pattern) {
 
 		for (unsigned int j = 0; j < size; ++j) {
 
-			Tile tile(pattern[i][j]);
+			Tile tile(pattern[i * size + j]);
 			this->tiles[i].push_back(tile);
 		}
 	}
