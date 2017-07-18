@@ -19,6 +19,14 @@ void Tile::setLetter(char letter) {
 	this->letter = letter;
 }
 
+unsigned int Tile::getDisplayNumber() const {
+	return this->display_number;
+}
+
+void Tile::setDisplayNumber(unsigned int display_number) {
+	this->display_number = display_number;
+}
+
 std::ostream& operator <<(std::ostream& stream, const Tile& tile) {
 
 	std::string display = Tile::DISPLAY_CLOSED;

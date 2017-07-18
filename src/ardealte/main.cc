@@ -17,6 +17,7 @@ int main() {
 	Puzzle puzzle(size, pattern);
 
 	std::cout << puzzle;
+	std::cout << puzzle.getDisplayNumbersStr();
 
 	delete [] pattern;
 
