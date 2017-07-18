@@ -1,16 +1,25 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
+#include <sstream>
 #include <vector>
 #include "ardealte/tile.h"
+
+enum class Direction {
+	ACROSS,
+	DOWN
+};
 
 class Entry {
 
 public:
-	Entry(std::vector<Tile *> tiles);
+	Entry(unsigned int entry_index, Direction direction, std::vector<Tile *> tiles);
+	std::string getId() const;
 	std::string getSolution() const;
 
 private:
+	unsigned int entry_index;
+	Direction direction;
 	std::vector<Tile *> tiles;
 };
 

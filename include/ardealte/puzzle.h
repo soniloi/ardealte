@@ -4,12 +4,8 @@
 #include <sstream>
 #include <vector>
 
+#include "ardealte/entry.h"
 #include "ardealte/tile.h"
-
-enum class Direction {
-	ACROSS,
-	DOWN
-};
 
 class Puzzle {
 

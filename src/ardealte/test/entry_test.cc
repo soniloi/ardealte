@@ -4,6 +4,20 @@
 #include "ardealte/entry.h"
 #include "ardealte/tile.h"
 
+TEST(EntryTest, AcrossId) {
+	std::vector<Tile *> tiles;
+	Entry entry(7, Direction::ACROSS, tiles);
+
+	ASSERT_EQ("7A", entry.getId());
+}
+
+TEST(EntryTest, DownId) {
+	std::vector<Tile *> tiles;
+	Entry entry(39, Direction::DOWN, tiles);
+
+	ASSERT_EQ("39D", entry.getId());
+}
+
 TEST(EntryTest, GetSolutionNull) {
 
 	Tile tile(true);
@@ -11,7 +25,7 @@ TEST(EntryTest, GetSolutionNull) {
 	std::vector<Tile *> tiles;
 	tiles.push_back(&tile);
 
-	Entry entry(tiles);
+	Entry entry(0, Direction::ACROSS, tiles);
 
 	ASSERT_EQ(1, entry.getSolution().length());
 }
@@ -39,7 +53,7 @@ TEST(EntryTest, GetSolutionNotNull) {
 	tiles.push_back(&tile5);
 	tiles.push_back(&tile6);
 
-	Entry entry(tiles);
+	Entry entry(0, Direction::ACROSS, tiles);
 
 	ASSERT_EQ("garden", entry.getSolution());
 }
