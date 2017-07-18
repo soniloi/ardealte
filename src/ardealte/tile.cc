@@ -11,6 +11,14 @@ bool Tile::isOpen() const {
 	return this->open;
 }
 
+char Tile::getLetter() const {
+	return this->letter;
+}
+
+void Tile::setLetter(char letter) {
+	this->letter = letter;
+}
+
 std::ostream& operator <<(std::ostream& stream, const Tile& tile) {
 
 	std::string display = Tile::DISPLAY_CLOSED;
