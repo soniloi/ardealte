@@ -8,8 +8,8 @@ TEST(EntryTest, GetSolutionNull) {
 
 	Tile tile(true);
 
-	std::vector<Tile> tiles;
-	tiles.push_back(tile);
+	std::vector<Tile *> tiles;
+	tiles.push_back(&tile);
 
 	Entry entry(tiles);
 
@@ -31,13 +31,13 @@ TEST(EntryTest, GetSolutionNotNull) {
 	Tile tile6(true);
 	tile6.setLetter('n');
 
-	std::vector<Tile> tiles;
-	tiles.push_back(tile1);
-	tiles.push_back(tile2);
-	tiles.push_back(tile3);
-	tiles.push_back(tile4);
-	tiles.push_back(tile5);
-	tiles.push_back(tile6);
+	std::vector<Tile *> tiles;
+	tiles.push_back(&tile1);
+	tiles.push_back(&tile2);
+	tiles.push_back(&tile3);
+	tiles.push_back(&tile4);
+	tiles.push_back(&tile5);
+	tiles.push_back(&tile6);
 
 	Entry entry(tiles);
 

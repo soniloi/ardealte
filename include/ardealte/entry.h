@@ -7,11 +7,11 @@
 class Entry {
 
 public:
-	Entry(std::vector<Tile> tiles);
+	Entry(std::vector<Tile *> tiles);
 	std::string getSolution() const;
 
 private:
-	std::vector<Tile> tiles;
+	std::vector<Tile *> tiles;
 };
 
 #endif
