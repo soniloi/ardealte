@@ -5,14 +5,6 @@
 
 class Tile {
 
-private:
-	static const std::string DISPLAY_CLOSED;
-	static const std::string DISPLAY_OPEN;
-	static const unsigned int DEFAULT_DISPLAY_NUMBER = 0;
-	bool open;
-	char letter = '\0';
-	unsigned int display_number = Tile::DEFAULT_DISPLAY_NUMBER;
-
 public:
 	Tile(bool open);
 	bool isOpen() const;
@@ -21,6 +13,14 @@ public:
 	unsigned int getDisplayNumber() const;
 	void setDisplayNumber(unsigned int display_number);
 	friend std::ostream& operator <<(std::ostream &stream, const Tile& tile);
+
+private:
+	static const std::string DISPLAY_CLOSED;
+	static const std::string DISPLAY_OPEN;
+	static const unsigned int DEFAULT_DISPLAY_NUMBER = 0;
+	bool open;
+	char letter = '\0';
+	unsigned int display_number = Tile::DEFAULT_DISPLAY_NUMBER;
 };
 
 #endif

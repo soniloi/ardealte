@@ -8,44 +8,11 @@ Puzzle::Puzzle(unsigned int size, bool * pattern) {
 	this->actual_size = size + Puzzle::buffer_size * 2;
 	this->visible_size = size;
 
-	this->tiles.push_back(Puzzle::createClosedTileRow(this->actual_size)); // Top buffer row
-
-	for (unsigned int i = 0; i < size; ++i) {
-
-		std::vector<Tile> row;
-		row.push_back(Tile(false)); // Left buffer column
-
-		for (unsigned int j = 0; j < size; ++j) {
-
-			Tile tile(pattern[i * size + j]);
-			row.push_back(tile);
-		}
-
-		row.push_back(Tile(false)); // Right buffer column
-		this->tiles.push_back(row);
-	}
-
-	this->tiles.push_back(Puzzle::createClosedTileRow(this->actual_size)); // Bottom buffer row
-
-	unsigned int entry_index = 1;
-	for (unsigned int i = Puzzle::buffer_size; i <= this->visible_size; ++i) {
-		for (unsigned int j = Puzzle::buffer_size; j <= this->visible_size; ++j) {
-			if (this->startsWord(i, j)) {
-				tiles[i][j].setDisplayNumber(entry_index++);
-			}
-		}
-	}
+	this->initBoard(pattern);
+	this->discoverEntries();
 }
 
 Puzzle::~Puzzle() {
-}
-
-std::vector<Tile> Puzzle::createClosedTileRow(unsigned int size) {
-	std::vector<Tile> row;
-	for (unsigned int i = 0; i < size; ++i) {
-		row.push_back(Tile(false));
-	}
-	return row;
 }
 
 std::string Puzzle::getDisplayNumbersStr() const {
@@ -96,4 +63,44 @@ bool Puzzle::startsWord(unsigned int i, unsigned int j) {
 
 	return (!this->tiles[i][j-1].isOpen() && this->tiles[i][j+1].isOpen())
 		|| (!this->tiles[i-1][j].isOpen() && this->tiles[i+1][j].isOpen());
+}
+
+std::vector<Tile> Puzzle::createClosedTileRow(unsigned int size) {
+	std::vector<Tile> row;
+	for (unsigned int i = 0; i < size; ++i) {
+		row.push_back(Tile(false));
+	}
+	return row;
+}
+
+void Puzzle::initBoard (bool * pattern) {
+	this->tiles.push_back(Puzzle::createClosedTileRow(this->actual_size)); // Top buffer row
+
+	for (unsigned int i = 0; i < this->visible_size; ++i) {
+
+		std::vector<Tile> row;
+		row.push_back(Tile(false)); // Left buffer column
+
+		for (unsigned int j = 0; j < this->visible_size; ++j) {
+
+			Tile tile(pattern[i * this->visible_size + j]);
+			row.push_back(tile);
+		}
+
+		row.push_back(Tile(false)); // Right buffer column
+		this->tiles.push_back(row);
+	}
+}
+
+void Puzzle::discoverEntries() {
+	this->tiles.push_back(Puzzle::createClosedTileRow(this->actual_size)); // Bottom buffer row
+
+	unsigned int entry_index = 1;
+	for (unsigned int i = Puzzle::buffer_size; i <= this->visible_size; ++i) {
+		for (unsigned int j = Puzzle::buffer_size; j <= this->visible_size; ++j) {
+			if (this->startsWord(i, j)) {
+				tiles[i][j].setDisplayNumber(entry_index++);
+			}
+		}
+	}
 }

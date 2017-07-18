@@ -7,6 +7,12 @@
 
 class Puzzle {
 
+public:
+	Puzzle(unsigned int size, bool * pattern);
+	~Puzzle();
+	std::string getDisplayNumbersStr() const;
+	friend std::ostream& operator <<(std::ostream &stream, const Puzzle& puzzle);
+
 private:
 	static const unsigned int buffer_size = 1;
 	unsigned int actual_size;
@@ -14,13 +20,9 @@ private:
 	std::vector<std::vector<Tile>> tiles;
 
 	static std::vector<Tile> createClosedTileRow(unsigned int size);
+	void initBoard (bool * pattern);
+	void discoverEntries();
 	bool startsWord(unsigned int i, unsigned int j);
-
-public:
-	Puzzle(unsigned int size, bool * pattern);
-	~Puzzle();
-	std::string getDisplayNumbersStr() const;
-	friend std::ostream& operator <<(std::ostream &stream, const Puzzle& puzzle);
 };
 
 #endif
