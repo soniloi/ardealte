@@ -7,8 +7,11 @@
 class Puzzle {
 
 private:
-	unsigned int size;
+	static const unsigned int buffer_size = 1;
+	unsigned int actual_size;
+	unsigned int visible_size;
 	std::vector<std::vector<Tile>> tiles;
+	static std::vector<Tile> createClosedTileRow(unsigned int size);
 
 public:
 	Puzzle(unsigned int size, bool * pattern);
