@@ -7,7 +7,7 @@ int main() {
 
 	const int size = 5;
 	bool * pattern = new bool[size * size] {
-		true, true, true, true, false,
+		false, true, true, true, false,
 		false, true, false, true, false,
 		true, true, true, true, true,
 		false, true, true, false, true,
@@ -16,7 +16,6 @@ int main() {
 
 	Puzzle puzzle(size, pattern);
 
-	std::cout << puzzle;
 	std::cout << puzzle.getDisplayNumbersStr();
 
 	delete [] pattern;

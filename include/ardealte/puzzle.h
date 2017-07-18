@@ -3,7 +3,13 @@
 
 #include <sstream>
 #include <vector>
+
 #include "ardealte/tile.h"
+
+enum class Direction {
+	ACROSS,
+	DOWN
+};
 
 class Puzzle {
 
@@ -22,7 +28,7 @@ private:
 	static std::vector<Tile> createClosedTileRow(unsigned int size);
 	void initBoard (bool * pattern);
 	void discoverEntries();
-	bool startsWord(unsigned int i, unsigned int j);
+	bool startsWord(unsigned int i, unsigned int j, Direction direction);
 };
 
 #endif

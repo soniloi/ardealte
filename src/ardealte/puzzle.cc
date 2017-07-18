@@ -55,14 +55,17 @@ std::ostream& operator <<(std::ostream& stream, const Puzzle& puzzle) {
 	return stream;
 }
 
-bool Puzzle::startsWord(unsigned int i, unsigned int j) {
+bool Puzzle::startsWord(unsigned int i, unsigned int j, Direction direction) {
 
 	if (!this->tiles[i][j].isOpen()) {
 		return false;
 	}
 
-	return (!this->tiles[i][j-1].isOpen() && this->tiles[i][j+1].isOpen())
-		|| (!this->tiles[i-1][j].isOpen() && this->tiles[i+1][j].isOpen());
+	if (direction == Direction::ACROSS) {
+		return !this->tiles[i][j-1].isOpen() && this->tiles[i][j+1].isOpen();
+	}
+
+	return !this->tiles[i-1][j].isOpen() && this->tiles[i+1][j].isOpen();
 }
 
 std::vector<Tile> Puzzle::createClosedTileRow(unsigned int size) {
@@ -98,8 +101,30 @@ void Puzzle::discoverEntries() {
 	unsigned int entry_index = 1;
 	for (unsigned int i = Puzzle::buffer_size; i <= this->visible_size; ++i) {
 		for (unsigned int j = Puzzle::buffer_size; j <= this->visible_size; ++j) {
-			if (this->startsWord(i, j)) {
-				tiles[i][j].setDisplayNumber(entry_index++);
+			unsigned int current_entry_index = entry_index;
+			if (this->startsWord(i, j, Direction::ACROSS)) {
+				tiles[i][j].setDisplayNumber(current_entry_index);
+				entry_index = current_entry_index + 1 ;
+
+				std::vector<Tile *> entry_tiles;
+				unsigned int k = j;
+				do {
+					entry_tiles.push_back(&tiles[i][k++]);
+				} while (tiles[i][k].isOpen());
+
+				std::cout << "Entry found: " << current_entry_index << " Across: (" << i << "," << j << ") -> (" << i << "," << (k-1) << ")" << std::endl;
+			}
+			if (this->startsWord(i, j, Direction::DOWN)) {
+				tiles[i][j].setDisplayNumber(current_entry_index);
+				entry_index = current_entry_index + 1;
+
+				std::vector<Tile *> entry_tiles;
+				unsigned int k = i;
+				do {
+					entry_tiles.push_back(&tiles[k++][j]);
+				} while (tiles[k][j].isOpen());
+
+				std::cout << "Entry found: " << current_entry_index << "   Down: (" << i << "," << j << ") -> (" << (k-1) << "," << j << ")" << std::endl;
 			}
 		}
 	}
