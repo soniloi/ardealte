@@ -6,6 +6,10 @@ Entry::Entry(unsigned int entry_index, Direction direction, std::vector<Tile *> 
 	this->tiles = tiles;
 }
 
+unsigned int Entry::getLength() const {
+	return this->tiles.size();
+}
+
 std::string Entry::getId() const {
 	std::stringstream ss;
 	ss << this->entry_index;

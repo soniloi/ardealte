@@ -41,6 +41,17 @@ std::string Puzzle::getDisplayNumbersStr() const {
 	return display.str();
 }
 
+std::string Puzzle::getEntriesStr() const {
+
+	std::stringstream ss;
+	for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
+		Entry entry = (*it);
+		ss << entry.getId() << " (" << entry.getLength() << ")" << std::endl;
+	}
+
+	return ss.str();
+}
+
 std::ostream& operator <<(std::ostream& stream, const Puzzle& puzzle) {
 
 	for (unsigned int i = Puzzle::buffer_size; i <= puzzle.visible_size; ++i) {
@@ -113,6 +124,7 @@ void Puzzle::discoverEntries() {
 				} while (tiles[i][k].isOpen());
 
 				Entry entry(current_entry_index, Direction::ACROSS, entry_tiles);
+				this->entries.push_back(entry);
 				std::cout << "Entry found: " << entry.getId() << " (" << i << "," << j << ") -> (" << i << "," << (k-1) << ")" << std::endl;
 			}
 			if (this->startsWord(i, j, Direction::DOWN)) {
@@ -126,6 +138,7 @@ void Puzzle::discoverEntries() {
 				} while (tiles[k][j].isOpen());
 
 				Entry entry(current_entry_index, Direction::DOWN, entry_tiles);
+				this->entries.push_back(entry);
 				std::cout << "Entry found: " << entry.getId() << " (" << i << "," << j << ") -> (" << (k-1) << "," << j << ")" << std::endl;
 			}
 		}

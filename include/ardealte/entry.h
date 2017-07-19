@@ -14,6 +14,7 @@ class Entry {
 
 public:
 	Entry(unsigned int entry_index, Direction direction, std::vector<Tile *> tiles);
+	unsigned int getLength() const;
 	std::string getId() const;
 	std::string getSolution() const;
 

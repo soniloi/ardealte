@@ -13,6 +13,7 @@ public:
 	Puzzle(unsigned int size, bool * pattern);
 	~Puzzle();
 	std::string getDisplayNumbersStr() const;
+	std::string getEntriesStr() const;
 	friend std::ostream& operator <<(std::ostream &stream, const Puzzle& puzzle);
 
 private:
@@ -20,6 +21,7 @@ private:
 	unsigned int actual_size;
 	unsigned int visible_size;
 	std::vector<std::vector<Tile>> tiles;
+	std::vector<Entry> entries;
 
 	static std::vector<Tile> createClosedTileRow(unsigned int size);
 	void initBoard (bool * pattern);
