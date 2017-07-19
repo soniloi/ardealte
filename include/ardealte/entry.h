@@ -1,6 +1,7 @@
 #ifndef ENTRY_H
 #define ENTRY_H
 
+#include <cassert>
 #include <sstream>
 #include <vector>
 #include "ardealte/tile.h"

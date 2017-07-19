@@ -58,7 +58,7 @@ TEST(EntryTest, GetSolutionSet) {
 	ASSERT_EQ("garden", entry.getSolution());
 }
 
-TEST(EntryTest, SetGetSolution) {
+TEST(EntryTest, SetGetSolutionLengthMatch) {
 
 	Tile tile(true);
 
@@ -69,6 +69,17 @@ TEST(EntryTest, SetGetSolution) {
 	entry.setSolution("a");
 
 	ASSERT_EQ("a", entry.getSolution());
+}
+
+TEST(EntryTest, SetGetSolutionLengthNotMatch) {
+
+	Tile tile(true);
+
+	std::vector<Tile *> tiles;
+	tiles.push_back(&tile);
+
+	Entry entry(0, Direction::ACROSS, tiles);
+	ASSERT_DEATH({entry.setSolution("cat");}, ".");
 }
 
 int main(int argc, char **argv) {

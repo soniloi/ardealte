@@ -30,6 +30,7 @@ std::string Entry::getSolution() const {
 }
 
 void Entry::setSolution(std::string solution) {
+	assert(solution.length() == this->tiles.size());
 	for (unsigned int i = 0; i < solution.length(); ++i) {
 		tiles[i]->setLetter(solution[i]);
 	}
