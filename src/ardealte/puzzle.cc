@@ -125,7 +125,6 @@ void Puzzle::discoverEntries() {
 
 				Entry entry(current_entry_index, Direction::ACROSS, entry_tiles);
 				this->entries.push_back(entry);
-				std::cout << "Entry found: " << entry.getId() << " (" << i << "," << j << ") -> (" << i << "," << (k-1) << ")" << std::endl;
 			}
 			if (this->startsWord(i, j, Direction::DOWN)) {
 				tiles[i][j].setDisplayNumber(current_entry_index);
@@ -139,7 +138,6 @@ void Puzzle::discoverEntries() {
 
 				Entry entry(current_entry_index, Direction::DOWN, entry_tiles);
 				this->entries.push_back(entry);
-				std::cout << "Entry found: " << entry.getId() << " (" << i << "," << j << ") -> (" << (k-1) << "," << j << ")" << std::endl;
 			}
 		}
 	}

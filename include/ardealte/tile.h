@@ -3,6 +3,8 @@
 
 #include <ostream>
 
+class Entry;
+
 class Tile {
 
 public:
@@ -12,6 +14,10 @@ public:
 	void setLetter(char letter);
 	unsigned int getDisplayNumber() const;
 	void setDisplayNumber(unsigned int display_number);
+	Entry * getAcrossEntry() const;
+	void setAcrossEntry(Entry * entry);
+	Entry * getDownEntry() const;
+	void setDownEntry(Entry * entry);
 	friend std::ostream& operator <<(std::ostream &stream, const Tile& tile);
 
 private:
@@ -22,6 +28,8 @@ private:
 	bool open;
 	char letter = Tile::WILDCARD;
 	unsigned int display_number = Tile::DEFAULT_DISPLAY_NUMBER;
+	Entry * across_entry = NULL;
+	Entry * down_entry = NULL;
 };
 
 #endif

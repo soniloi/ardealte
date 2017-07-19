@@ -18,44 +18,48 @@ TEST(EntryTest, DownId) {
 	ASSERT_EQ("39D", entry.getId());
 }
 
-TEST(EntryTest, GetSolutionUnset) {
+TEST(EntryTest, SingleTile) {
 
 	Tile tile(true);
 
 	std::vector<Tile *> tiles;
 	tiles.push_back(&tile);
 
-	Entry entry(0, Direction::ACROSS, tiles);
+	Entry entry(0, Direction::DOWN, tiles);
 
 	ASSERT_EQ(".", entry.getSolution());
+	ASSERT_EQ(NULL, tile.getAcrossEntry());
+	ASSERT_EQ(&entry, tile.getDownEntry());
 }
 
-TEST(EntryTest, GetSolutionSet) {
+TEST(EntryTest, MultipleTile) {
 
 	Tile tile1(true);
-	tile1.setLetter('g');
+	tile1.setLetter('m');
 	Tile tile2(true);
-	tile2.setLetter('a');
+	tile2.setLetter('i');
 	Tile tile3(true);
-	tile3.setLetter('r');
+	tile3.setLetter('c');
 	Tile tile4(true);
-	tile4.setLetter('d');
-	Tile tile5(true);
-	tile5.setLetter('e');
-	Tile tile6(true);
-	tile6.setLetter('n');
+	tile4.setLetter('e');
 
 	std::vector<Tile *> tiles;
 	tiles.push_back(&tile1);
 	tiles.push_back(&tile2);
 	tiles.push_back(&tile3);
 	tiles.push_back(&tile4);
-	tiles.push_back(&tile5);
-	tiles.push_back(&tile6);
 
 	Entry entry(0, Direction::ACROSS, tiles);
 
-	ASSERT_EQ("garden", entry.getSolution());
+	ASSERT_EQ("mice", entry.getSolution());
+	ASSERT_EQ(&entry, tile1.getAcrossEntry());
+	ASSERT_EQ(NULL, tile1.getDownEntry());
+	ASSERT_EQ(&entry, tile2.getAcrossEntry());
+	ASSERT_EQ(NULL, tile2.getDownEntry());
+	ASSERT_EQ(&entry, tile3.getAcrossEntry());
+	ASSERT_EQ(NULL, tile3.getDownEntry());
+	ASSERT_EQ(&entry, tile4.getAcrossEntry());
+	ASSERT_EQ(NULL, tile4.getDownEntry());
 }
 
 TEST(EntryTest, SetGetSolutionLengthMatch) {

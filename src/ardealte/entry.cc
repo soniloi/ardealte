@@ -4,6 +4,14 @@ Entry::Entry(unsigned int entry_index, Direction direction, std::vector<Tile *> 
 	this->entry_index = entry_index;
 	this->direction = direction;
 	this->tiles = tiles;
+
+	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
+		if (this->direction == Direction::ACROSS) {
+			(*it)->setAcrossEntry(this);
+		} else {
+			(*it)->setDownEntry(this);
+		}
+	}
 }
 
 unsigned int Entry::getLength() const {
