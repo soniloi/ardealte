@@ -10,3 +10,14 @@ void Dictionary::insert(std::string term) {
 bool Dictionary::lookup(std::string term) const {
 	return this->terms.find(term) != this->terms.end();
 }
+
+std::set<std::string> Dictionary::getMatches(std::string pattern) const {
+	std::set<std::string> matches;
+	for (auto it = this->terms.begin(); it != this->terms.end(); it++) {
+		std::string term = (*it);
+		if (std::regex_match(term, std::regex(pattern))) {
+			matches.insert(term);
+		}
+	}
+	return matches;
+}
