@@ -4,12 +4,9 @@
 #include <cassert>
 #include <sstream>
 #include <vector>
-#include "ardealte/tile.h"
 
-enum class Direction {
-	ACROSS,
-	DOWN
-};
+#include "ardealte/direction.h"
+#include "ardealte/tile.h"
 
 class Entry {
 
