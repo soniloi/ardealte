@@ -1,9 +1,8 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 
-#include <algorithm>
 #include <string>
-#include <vector>
+#include <set>
 
 class Dictionary {
 
@@ -13,7 +12,7 @@ public:
 	bool lookup(std::string term) const;
 
 private:
-	std::vector<std::string> terms;
+	std::set<std::string> terms;
 };
 
 #endif

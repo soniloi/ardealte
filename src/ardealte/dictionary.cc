@@ -4,9 +4,9 @@ Dictionary::Dictionary() {
 }
 
 void Dictionary::insert(std::string term) {
-	this->terms.push_back(term);
+	this->terms.insert(term);
 }
 
 bool Dictionary::lookup(std::string term) const {
-	return std::find(this->terms.begin(), this->terms.end(), term) != this->terms.end();
+	return this->terms.find(term) != this->terms.end();
 }
