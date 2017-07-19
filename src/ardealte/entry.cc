@@ -28,3 +28,9 @@ std::string Entry::getSolution() const {
 	}
 	return solution;
 }
+
+void Entry::setSolution(std::string solution) {
+	for (unsigned int i = 0; i < solution.length(); ++i) {
+		tiles[i]->setLetter(solution[i]);
+	}
+}

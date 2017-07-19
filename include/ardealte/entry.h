@@ -17,6 +17,7 @@ public:
 	unsigned int getLength() const;
 	std::string getId() const;
 	std::string getSolution() const;
+	void setSolution(std::string solution);
 
 private:
 	unsigned int entry_index;

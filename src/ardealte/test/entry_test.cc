@@ -18,7 +18,7 @@ TEST(EntryTest, DownId) {
 	ASSERT_EQ("39D", entry.getId());
 }
 
-TEST(EntryTest, GetSolutionNull) {
+TEST(EntryTest, GetSolutionUnset) {
 
 	Tile tile(true);
 
@@ -27,10 +27,10 @@ TEST(EntryTest, GetSolutionNull) {
 
 	Entry entry(0, Direction::ACROSS, tiles);
 
-	ASSERT_EQ(1, entry.getSolution().length());
+	ASSERT_EQ(".", entry.getSolution());
 }
 
-TEST(EntryTest, GetSolutionNotNull) {
+TEST(EntryTest, GetSolutionSet) {
 
 	Tile tile1(true);
 	tile1.setLetter('g');
@@ -56,6 +56,19 @@ TEST(EntryTest, GetSolutionNotNull) {
 	Entry entry(0, Direction::ACROSS, tiles);
 
 	ASSERT_EQ("garden", entry.getSolution());
+}
+
+TEST(EntryTest, SetGetSolution) {
+
+	Tile tile(true);
+
+	std::vector<Tile *> tiles;
+	tiles.push_back(&tile);
+
+	Entry entry(0, Direction::ACROSS, tiles);
+	entry.setSolution("a");
+
+	ASSERT_EQ("a", entry.getSolution());
 }
 
 int main(int argc, char **argv) {

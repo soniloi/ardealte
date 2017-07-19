@@ -18,8 +18,9 @@ private:
 	static const std::string DISPLAY_CLOSED;
 	static const std::string DISPLAY_OPEN;
 	static const unsigned int DEFAULT_DISPLAY_NUMBER = 0;
+	static const char WILDCARD = '.';
 	bool open;
-	char letter = '\0';
+	char letter = Tile::WILDCARD;
 	unsigned int display_number = Tile::DEFAULT_DISPLAY_NUMBER;
 };
 
