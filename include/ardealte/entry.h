@@ -17,6 +17,7 @@ public:
 	std::string getSolution() const;
 	void setSolution(std::string solution);
 	void clearUniqueTiles();
+	std::vector<Entry *> getCrossings();
 
 private:
 	unsigned int entry_index;

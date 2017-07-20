@@ -135,6 +135,55 @@ TEST(EntryTest, ClearUniqueTilesWithCrossing) {
 	ASSERT_EQ("am", downEntry.getSolution());
 }
 
+TEST(EntryTest, GetCrossingsNoCrossings) {
+
+	Tile tile1(true);
+	tile1.setLetter('c');
+	Tile tile2(true);
+	tile2.setLetter('a');
+	Tile tile3(true);
+	tile3.setLetter('t');
+
+	std::vector<Tile *> tiles;
+	tiles.push_back(&tile1);
+	tiles.push_back(&tile2);
+	tiles.push_back(&tile3);
+
+	Entry entry(0, Direction::ACROSS, tiles);
+	std::vector<Entry *> crossings = entry.getCrossings();
+
+	ASSERT_TRUE(crossings.empty());
+}
+
+TEST(EntryTest, GetCrossingsWithCrossings) {
+
+	Tile tile1(true);
+	tile1.setLetter('c');
+	Tile tile2(true);
+	tile2.setLetter('a');
+	Tile tile3(true);
+	tile3.setLetter('t');
+	Tile tile4(true);
+	tile4.setLetter('m');
+
+	std::vector<Tile *> acrossTiles;
+	acrossTiles.push_back(&tile1);
+	acrossTiles.push_back(&tile2);
+	acrossTiles.push_back(&tile3);
+
+	std::vector<Tile *> downTiles;
+	downTiles.push_back(&tile2);
+	downTiles.push_back(&tile4);
+
+	Entry acrossEntry(0, Direction::ACROSS, acrossTiles);
+	Entry downEntry(0, Direction::DOWN, downTiles);
+
+	std::vector<Entry *> crossings = acrossEntry.getCrossings();
+
+	ASSERT_EQ(1, crossings.size());
+	ASSERT_EQ(&downEntry, crossings[0]);
+}
+
 int main(int argc, char **argv) {
 	::testing::InitGoogleTest(&argc, argv);
 	return RUN_ALL_TESTS();

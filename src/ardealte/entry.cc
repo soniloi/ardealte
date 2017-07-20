@@ -45,8 +45,8 @@ void Entry::clearUniqueTiles() {
 	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
 
 		Tile * tile = (*it);
-		Direction crossDirection = Direction::ACROSS;
 
+		Direction crossDirection = Direction::ACROSS;
 		if (this->direction == Direction::ACROSS) {
 			crossDirection = Direction::DOWN;
 		}
@@ -56,4 +56,25 @@ void Entry::clearUniqueTiles() {
 			tile->resetLetter();
 		}
 	}
+}
+
+std::vector<Entry *> Entry::getCrossings() {
+
+	std::vector<Entry *> crossings;
+	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
+
+		Tile * tile = (*it);
+
+		Direction crossDirection = Direction::ACROSS;
+		if (this->direction == Direction::ACROSS) {
+			crossDirection = Direction::DOWN;
+		}
+
+		Entry * crossEntry = tile->getEntry(crossDirection);
+		if (crossEntry) {
+			crossings.push_back(crossEntry);
+		}
+	}
+
+	return crossings;
 }
