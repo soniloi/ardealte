@@ -16,6 +16,7 @@ public:
 	std::string getId() const;
 	std::string getSolution() const;
 	void setSolution(std::string solution);
+	void clearUniqueTiles();
 
 private:
 	unsigned int entry_index;

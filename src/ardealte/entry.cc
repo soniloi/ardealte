@@ -39,3 +39,21 @@ void Entry::setSolution(std::string solution) {
 		tiles[i]->setLetter(solution[i]);
 	}
 }
+
+void Entry::clearUniqueTiles() {
+
+	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
+
+		Tile * tile = (*it);
+		Direction crossDirection = Direction::ACROSS;
+
+		if (this->direction == Direction::ACROSS) {
+			crossDirection = Direction::DOWN;
+		}
+
+		Entry * crossEntry = tile->getEntry(crossDirection);
+		if (!crossEntry) {
+			tile->setLetter('.');
+		}
+	}
+}
