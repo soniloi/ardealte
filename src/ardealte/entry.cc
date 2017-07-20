@@ -53,7 +53,7 @@ void Entry::clearUniqueTiles() {
 
 		Entry * crossEntry = tile->getEntry(crossDirection);
 		if (!crossEntry) {
-			tile->setLetter('.');
+			tile->resetLetter();
 		}
 	}
 }

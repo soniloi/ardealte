@@ -14,6 +14,7 @@ public:
 	bool isOpen() const;
 	char getLetter() const;
 	void setLetter(char letter);
+	void resetLetter();
 	unsigned int getDisplayNumber() const;
 	void setDisplayNumber(unsigned int display_number);
 	Entry * getEntry(Direction direction) const;

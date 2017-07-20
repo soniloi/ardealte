@@ -19,6 +19,10 @@ void Tile::setLetter(char letter) {
 	this->letter = letter;
 }
 
+void Tile::resetLetter() {
+	this->letter = Tile::WILDCARD;
+}
+
 unsigned int Tile::getDisplayNumber() const {
 	return this->display_number;
 }
