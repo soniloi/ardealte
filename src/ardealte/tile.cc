@@ -27,20 +27,19 @@ void Tile::setDisplayNumber(unsigned int display_number) {
 	this->display_number = display_number;
 }
 
-Entry * Tile::getAcrossEntry() const {
-	return this->across_entry;
-}
-
-void Tile::setAcrossEntry(Entry * entry) {
-	this->across_entry = entry;
-}
-
-Entry * Tile::getDownEntry() const {
+Entry * Tile::getEntry(Direction direction) const {
+	if (direction == Direction::ACROSS) {
+		return this->across_entry;
+	}
 	return this->down_entry;
 }
 
-void Tile::setDownEntry(Entry * entry) {
-	this->down_entry = entry;
+void Tile::setEntry(Entry * entry, Direction direction) {
+	if (direction == Direction::ACROSS) {
+		this->across_entry = entry;
+	} else {
+		this->down_entry = entry;
+	}
 }
 
 std::ostream& operator <<(std::ostream& stream, const Tile& tile) {

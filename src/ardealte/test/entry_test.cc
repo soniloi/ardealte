@@ -28,8 +28,8 @@ TEST(EntryTest, SingleTile) {
 	Entry entry(0, Direction::DOWN, tiles);
 
 	ASSERT_EQ(".", entry.getSolution());
-	ASSERT_EQ(NULL, tile.getAcrossEntry());
-	ASSERT_EQ(&entry, tile.getDownEntry());
+	ASSERT_EQ(NULL, tile.getEntry(Direction::ACROSS));
+	ASSERT_EQ(&entry, tile.getEntry(Direction::DOWN));
 }
 
 TEST(EntryTest, MultipleTile) {
@@ -52,14 +52,14 @@ TEST(EntryTest, MultipleTile) {
 	Entry entry(0, Direction::ACROSS, tiles);
 
 	ASSERT_EQ("mice", entry.getSolution());
-	ASSERT_EQ(&entry, tile1.getAcrossEntry());
-	ASSERT_EQ(NULL, tile1.getDownEntry());
-	ASSERT_EQ(&entry, tile2.getAcrossEntry());
-	ASSERT_EQ(NULL, tile2.getDownEntry());
-	ASSERT_EQ(&entry, tile3.getAcrossEntry());
-	ASSERT_EQ(NULL, tile3.getDownEntry());
-	ASSERT_EQ(&entry, tile4.getAcrossEntry());
-	ASSERT_EQ(NULL, tile4.getDownEntry());
+	ASSERT_EQ(&entry, tile1.getEntry(Direction::ACROSS));
+	ASSERT_EQ(NULL, tile1.getEntry(Direction::DOWN));
+	ASSERT_EQ(&entry, tile2.getEntry(Direction::ACROSS));
+	ASSERT_EQ(NULL, tile2.getEntry(Direction::DOWN));
+	ASSERT_EQ(&entry, tile3.getEntry(Direction::ACROSS));
+	ASSERT_EQ(NULL, tile3.getEntry(Direction::DOWN));
+	ASSERT_EQ(&entry, tile4.getEntry(Direction::ACROSS));
+	ASSERT_EQ(NULL, tile4.getEntry(Direction::DOWN));
 }
 
 TEST(EntryTest, SetGetSolutionLengthMatch) {

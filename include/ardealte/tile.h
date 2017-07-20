@@ -3,6 +3,8 @@
 
 #include <ostream>
 
+#include "ardealte/direction.h"
+
 class Entry;
 
 class Tile {
@@ -14,10 +16,8 @@ public:
 	void setLetter(char letter);
 	unsigned int getDisplayNumber() const;
 	void setDisplayNumber(unsigned int display_number);
-	Entry * getAcrossEntry() const;
-	void setAcrossEntry(Entry * entry);
-	Entry * getDownEntry() const;
-	void setDownEntry(Entry * entry);
+	Entry * getEntry(Direction direction) const;
+	void setEntry(Entry * entry, Direction direction);
 	friend std::ostream& operator <<(std::ostream &stream, const Tile& tile);
 
 private:

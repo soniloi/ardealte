@@ -6,11 +6,7 @@ Entry::Entry(unsigned int entry_index, Direction direction, std::vector<Tile *> 
 	this->tiles = tiles;
 
 	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
-		if (this->direction == Direction::ACROSS) {
-			(*it)->setAcrossEntry(this);
-		} else {
-			(*it)->setDownEntry(this);
-		}
+		(*it)->setEntry(this, direction);
 	}
 }
 
