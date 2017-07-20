@@ -23,6 +23,7 @@ private:
 	unsigned int entry_index;
 	Direction direction;
 	std::vector<Tile *> tiles;
+	Entry * getCrossEntry(Tile * intersection);
 };
 
 #endif

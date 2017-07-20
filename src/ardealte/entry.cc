@@ -41,17 +41,9 @@ void Entry::setSolution(std::string solution) {
 }
 
 void Entry::clearUniqueTiles() {
-
 	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
-
 		Tile * tile = (*it);
-
-		Direction crossDirection = Direction::ACROSS;
-		if (this->direction == Direction::ACROSS) {
-			crossDirection = Direction::DOWN;
-		}
-
-		Entry * crossEntry = tile->getEntry(crossDirection);
+		Entry * crossEntry = this->getCrossEntry(tile);
 		if (!crossEntry) {
 			tile->resetLetter();
 		}
@@ -62,19 +54,21 @@ std::vector<Entry *> Entry::getCrossings() {
 
 	std::vector<Entry *> crossings;
 	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
-
-		Tile * tile = (*it);
-
-		Direction crossDirection = Direction::ACROSS;
-		if (this->direction == Direction::ACROSS) {
-			crossDirection = Direction::DOWN;
-		}
-
-		Entry * crossEntry = tile->getEntry(crossDirection);
+		Entry * crossEntry = this->getCrossEntry(*it);
 		if (crossEntry) {
 			crossings.push_back(crossEntry);
 		}
 	}
 
 	return crossings;
+}
+
+Entry * Entry::getCrossEntry(Tile * intersection) {
+
+	Direction crossDirection = Direction::ACROSS;
+	if (this->direction == Direction::ACROSS) {
+		crossDirection = Direction::DOWN;
+	}
+
+	return intersection->getEntry(crossDirection);
 }
