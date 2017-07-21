@@ -4,6 +4,7 @@ Entry::Entry(unsigned int entry_index, Direction direction, std::vector<Tile *> 
 	this->entry_index = entry_index;
 	this->direction = direction;
 	this->tiles = tiles;
+	this->complete = false;
 
 	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
 		(*it)->setEntry(this, direction);
@@ -23,6 +24,14 @@ std::string Entry::getId() const {
 		ss << "D";
 	}
 	return ss.str();
+}
+
+bool Entry::isComplete() const {
+	return this->complete;
+}
+
+void Entry::setComplete(bool complete) {
+	this->complete = complete;
 }
 
 std::string Entry::getSolution() const {

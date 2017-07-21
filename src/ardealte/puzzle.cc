@@ -142,4 +142,25 @@ void Puzzle::discoverEntries() {
 			}
 		}
 	}
+
+	bool finished = false;
+	while (!finished) {
+		finished = true;
+		for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
+			Entry * entry = &(*it);
+			std::cout << "Seeking match for " << entry->getId() << " " << entry->getSolution() << std::endl;
+			if (!entry->isComplete()) {
+				std::string current = entry->getSolution();
+				std::set<std::string> matches = this->dictionary->getMatches(current);
+				if (matches.empty()) {
+					finished = false;
+				} else {
+					for (auto jt = matches.begin(); jt != matches.end(); jt++) {
+						std::cout << "\tMatch found for " << entry->getId() << ": " << (*jt) << std::endl;
+					}
+				}
+				entry->setComplete(true);
+			}
+		}
+	}
 }

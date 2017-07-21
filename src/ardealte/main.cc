@@ -16,6 +16,14 @@ int main() {
 	};
 
 	Dictionary dictionary;
+	dictionary.insert("ear");
+	dictionary.insert("kin");
+	dictionary.insert("run");
+	dictionary.insert("sent");
+	dictionary.insert("sit");
+	dictionary.insert("sneak");
+	dictionary.insert("ta");
+	dictionary.insert("tea");
 
 	Puzzle puzzle(size, pattern, &dictionary);
 
