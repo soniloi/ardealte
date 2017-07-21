@@ -148,10 +148,11 @@ void Puzzle::discoverEntries() {
 		finished = true;
 		for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
 			Entry * entry = &(*it);
+			std::set<std::string> excludes;
 			std::cout << "Seeking match for " << entry->getId() << " " << entry->getSolution() << std::endl;
 			if (!entry->isComplete()) {
 				std::string current = entry->getSolution();
-				std::set<std::string> matches = this->dictionary->getMatches(current);
+				std::set<std::string> matches = this->dictionary->getMatches(current, excludes);
 				if (matches.empty()) {
 					finished = false;
 				} else {
