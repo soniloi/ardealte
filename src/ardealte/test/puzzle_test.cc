@@ -1,13 +1,15 @@
 #include <sstream>
 
 #include "gtest/gtest.h"
+#include "ardealte/dictionary.h"
 #include "ardealte/puzzle.h"
 
 TEST(PuzzleTest, InitAllFalse) {
 	const int size = 5;
 	bool * pattern = new bool[size * size]();
+	Dictionary dictionary;
 
-	Puzzle puzzle(size, pattern);
+	Puzzle puzzle(size, pattern, &dictionary);
 
 	std::stringstream ss;
 	ss << puzzle;
@@ -23,8 +25,9 @@ TEST(PuzzleTest, InitMixed) {
 		false, true, false,
 		true, true, true
 	};
+	Dictionary dictionary;
 
-	Puzzle puzzle(size, pattern);
+	Puzzle puzzle(size, pattern, &dictionary);
 
 	std::stringstream ss;
 	ss << puzzle;

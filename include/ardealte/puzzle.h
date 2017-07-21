@@ -4,13 +4,14 @@
 #include <sstream>
 #include <vector>
 
+#include "ardealte/dictionary.h"
 #include "ardealte/entry.h"
 #include "ardealte/tile.h"
 
 class Puzzle {
 
 public:
-	Puzzle(unsigned int size, bool * pattern);
+	Puzzle(unsigned int size, bool * pattern, Dictionary * dictionary);
 	~Puzzle();
 	std::string getDisplayNumbersStr() const;
 	std::string getEntriesStr() const;
@@ -18,6 +19,7 @@ public:
 
 private:
 	static const unsigned int buffer_size = 1;
+	Dictionary * dictionary;
 	unsigned int actual_size;
 	unsigned int visible_size;
 	std::vector<std::vector<Tile>> tiles;

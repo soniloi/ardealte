@@ -3,11 +3,12 @@
 
 #include "ardealte/puzzle.h"
 
-Puzzle::Puzzle(unsigned int size, bool * pattern) {
+Puzzle::Puzzle(unsigned int size, bool * pattern, Dictionary * dictionary) {
 
 	this->actual_size = size + Puzzle::buffer_size * 2;
 	this->visible_size = size;
 
+	this->dictionary = dictionary;
 	this->initBoard(pattern);
 	this->discoverEntries();
 }

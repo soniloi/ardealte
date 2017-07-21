@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "ardealte/dictionary.h"
 #include "ardealte/main.h"
 #include "ardealte/puzzle.h"
 
@@ -14,7 +15,9 @@ int main() {
 		false, false, true, true, true
 	};
 
-	Puzzle puzzle(size, pattern);
+	Dictionary dictionary;
+
+	Puzzle puzzle(size, pattern, &dictionary);
 
 	std::cout << puzzle.getDisplayNumbersStr();
 	std::cout << puzzle.getEntriesStr();
