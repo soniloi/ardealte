@@ -113,6 +113,9 @@ void Puzzle::initBoard (bool * pattern) {
 void Puzzle::createEntry(unsigned int entry_index, Direction direction, std::vector<Tile *> tiles) {
 	Entry * entry = new Entry(entry_index, direction, tiles);
 	this->entries.push_back(entry);
+	for (auto it = tiles.begin(); it != tiles.end(); it++) {
+		(*it)->setEntry(direction, entry);
+	}
 }
 
 void Puzzle::discoverEntries() {

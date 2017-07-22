@@ -5,10 +5,6 @@ Entry::Entry(unsigned int entry_index, Direction direction, std::vector<Tile *> 
 	this->direction = direction;
 	this->tiles = tiles;
 	this->complete = false;
-
-	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
-		(*it)->setEntry(direction, this);
-	}
 }
 
 unsigned int Entry::getLength() const {

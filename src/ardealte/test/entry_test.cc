@@ -26,6 +26,7 @@ TEST(EntryTest, SingleTile) {
 	tiles.push_back(&tile);
 
 	Entry entry(0, Direction::DOWN, tiles);
+	tile.setEntry(Direction::DOWN, &entry);
 
 	ASSERT_EQ(".", entry.getSolution());
 	ASSERT_EQ(NULL, tile.getEntry(Direction::ACROSS));
@@ -50,6 +51,10 @@ TEST(EntryTest, MultipleTile) {
 	tiles.push_back(&tile4);
 
 	Entry entry(0, Direction::ACROSS, tiles);
+	tile1.setEntry(Direction::ACROSS, &entry);
+	tile2.setEntry(Direction::ACROSS, &entry);
+	tile3.setEntry(Direction::ACROSS, &entry);
+	tile4.setEntry(Direction::ACROSS, &entry);
 
 	ASSERT_EQ("mice", entry.getSolution());
 	ASSERT_EQ(&entry, tile1.getEntry(Direction::ACROSS));
@@ -70,6 +75,7 @@ TEST(EntryTest, SetGetSolutionLengthMatch) {
 	tiles.push_back(&tile);
 
 	Entry entry(0, Direction::ACROSS, tiles);
+	tile.setEntry(Direction::ACROSS, &entry);
 	entry.setSolution("a");
 
 	ASSERT_EQ("a", entry.getSolution());
@@ -83,6 +89,8 @@ TEST(EntryTest, SetGetSolutionLengthNotMatch) {
 	tiles.push_back(&tile);
 
 	Entry entry(0, Direction::ACROSS, tiles);
+	tile.setEntry(Direction::ACROSS, &entry);
+
 	ASSERT_DEATH({entry.setSolution("cat");}, ".");
 }
 
@@ -101,6 +109,10 @@ TEST(EntryTest, ClearUniqueTilesNoCrossings) {
 	tiles.push_back(&tile3);
 
 	Entry entry(0, Direction::ACROSS, tiles);
+	tile1.setEntry(Direction::ACROSS, &entry);
+	tile2.setEntry(Direction::ACROSS, &entry);
+	tile3.setEntry(Direction::ACROSS, &entry);
+
 	entry.clearUniqueTiles();
 
 	ASSERT_EQ("...", entry.getSolution());
@@ -127,7 +139,13 @@ TEST(EntryTest, ClearUniqueTilesIncompleteCrossing) {
 	downTiles.push_back(&tile4);
 
 	Entry acrossEntry(0, Direction::ACROSS, acrossTiles);
+	tile1.setEntry(Direction::ACROSS, &acrossEntry);
+	tile2.setEntry(Direction::ACROSS, &acrossEntry);
+	tile3.setEntry(Direction::ACROSS, &acrossEntry);
+
 	Entry downEntry(0, Direction::DOWN, downTiles);
+	tile2.setEntry(Direction::DOWN, &downEntry);
+	tile4.setEntry(Direction::DOWN, &downEntry);
 
 	acrossEntry.clearUniqueTiles();
 
@@ -156,7 +174,13 @@ TEST(EntryTest, ClearUniqueTilesCompleteCrossing) {
 	downTiles.push_back(&tile4);
 
 	Entry acrossEntry(0, Direction::ACROSS, acrossTiles);
+	tile1.setEntry(Direction::ACROSS, &acrossEntry);
+	tile2.setEntry(Direction::ACROSS, &acrossEntry);
+	tile3.setEntry(Direction::ACROSS, &acrossEntry);
+
 	Entry downEntry(0, Direction::DOWN, downTiles);
+	tile2.setEntry(Direction::DOWN, &downEntry);
+	tile4.setEntry(Direction::DOWN, &downEntry);
 	downEntry.setComplete(true);
 
 	acrossEntry.clearUniqueTiles();
@@ -180,6 +204,10 @@ TEST(EntryTest, GetCrossingsNoCrossings) {
 	tiles.push_back(&tile3);
 
 	Entry entry(0, Direction::ACROSS, tiles);
+	tile1.setEntry(Direction::ACROSS, &entry);
+	tile2.setEntry(Direction::ACROSS, &entry);
+	tile3.setEntry(Direction::ACROSS, &entry);
+
 	std::vector<Entry *> crossings = entry.getCrossings();
 
 	ASSERT_TRUE(crossings.empty());
@@ -206,7 +234,13 @@ TEST(EntryTest, GetCrossingsWithCrossings) {
 	downTiles.push_back(&tile4);
 
 	Entry acrossEntry(0, Direction::ACROSS, acrossTiles);
+	tile1.setEntry(Direction::ACROSS, &acrossEntry);
+	tile2.setEntry(Direction::ACROSS, &acrossEntry);
+	tile3.setEntry(Direction::ACROSS, &acrossEntry);
+
 	Entry downEntry(0, Direction::DOWN, downTiles);
+	tile2.setEntry(Direction::DOWN, &downEntry);
+	tile4.setEntry(Direction::DOWN, &downEntry);
 
 	std::vector<Entry *> crossings = acrossEntry.getCrossings();
 
