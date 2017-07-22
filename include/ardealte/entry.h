@@ -2,6 +2,7 @@
 #define ENTRY_H
 
 #include <cassert>
+#include <iostream>
 #include <sstream>
 #include <vector>
 
@@ -26,6 +27,7 @@ private:
 	Direction direction;
 	std::vector<Tile *> tiles;
 	bool complete;
+
 	Entry * getCrossEntry(Tile * intersection);
 };
 

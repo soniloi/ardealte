@@ -14,6 +14,9 @@ Puzzle::Puzzle(unsigned int size, bool * pattern, Dictionary * dictionary) {
 }
 
 Puzzle::~Puzzle() {
+	for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
+		delete (*it);
+	}
 }
 
 std::string Puzzle::getDisplayNumbersStr() const {
@@ -46,8 +49,8 @@ std::string Puzzle::getEntriesStr() const {
 
 	std::stringstream ss;
 	for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
-		Entry entry = (*it);
-		ss << entry.getId() << " (" << entry.getLength() << ")" << std::endl;
+		Entry * entry = (*it);
+		ss << entry->getId() << " (" << entry->getLength() << ")" << std::endl;
 	}
 
 	return ss.str();
@@ -124,7 +127,7 @@ void Puzzle::discoverEntries() {
 					entry_tiles.push_back(&tiles[i][k++]);
 				} while (tiles[i][k].isOpen());
 
-				Entry entry(current_entry_index, Direction::ACROSS, entry_tiles);
+				Entry * entry = new Entry(current_entry_index, Direction::ACROSS, entry_tiles);
 				this->entries.push_back(entry);
 			}
 			if (this->startsWord(i, j, Direction::DOWN)) {
@@ -137,12 +140,22 @@ void Puzzle::discoverEntries() {
 					entry_tiles.push_back(&tiles[k++][j]);
 				} while (tiles[k][j].isOpen());
 
-				Entry entry(current_entry_index, Direction::DOWN, entry_tiles);
+				Entry * entry = new Entry(current_entry_index, Direction::DOWN, entry_tiles);
 				this->entries.push_back(entry);
 			}
 		}
 	}
 
+	for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
+		std::cout << (*it) << " " << (*it)->getId() << " crossings: ";
+		std::vector<Entry *> crossEntries = (*it)->getCrossings();
+		for (auto jt = crossEntries.begin(); jt != crossEntries.end(); jt++) {
+			std::cout << (*jt)->getId() << " ";
+		}
+		std::cout << std::endl;
+	}
+
+/*
 	bool finished = false;
 	while (!finished) {
 		finished = true;
@@ -164,4 +177,5 @@ void Puzzle::discoverEntries() {
 			}
 		}
 	}
+*/
 }
