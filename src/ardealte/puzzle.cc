@@ -155,27 +155,57 @@ void Puzzle::discoverEntries() {
 		std::cout << std::endl;
 	}
 
-/*
+	std::default_random_engine rng;
+	std::map<Entry *, std::set<std::string>> invalid_matches;
+
 	bool finished = false;
 	while (!finished) {
 		finished = true;
 		for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
-			Entry * entry = &(*it);
-			std::set<std::string> excludes;
-			std::cout << "Seeking match for " << entry->getId() << " " << entry->getSolution() << std::endl;
+			Entry * entry = *it;
+			std::set<std::string> excludes = invalid_matches[entry];
+			std::cout << "Seeking match for [" << entry->getId() << "] \"" << entry->getSolution() << "\" ";
 			if (!entry->isComplete()) {
 				std::string current = entry->getSolution();
-				std::set<std::string> matches = this->dictionary->getMatches(current, excludes);
-				if (matches.empty()) {
+				std::set<std::string> matches_set = this->dictionary->getMatches(current, excludes);
+				if (matches_set.empty()) {
 					finished = false;
-				} else {
-					for (auto jt = matches.begin(); jt != matches.end(); jt++) {
-						std::cout << "\tMatch found for " << entry->getId() << ": " << (*jt) << std::endl;
+					std::vector<Entry *> crossEntries = entry->getCrossings();
+					std::vector<Entry *> filteredCrossEntries;
+					for (auto it = crossEntries.begin(); it != crossEntries.end(); it++) {
+						if ((*it)->isComplete()) {
+							filteredCrossEntries.push_back(*it);
+						}
 					}
+					if (!filteredCrossEntries.empty()) {
+						std::uniform_int_distribution<int> distribution(0, filteredCrossEntries.size()-1);
+						int index = distribution(rng);
+						Entry * crossEntry = filteredCrossEntries[index];
+						invalid_matches[crossEntry].insert(crossEntry->getSolution());
+						crossEntry->setComplete(false);
+						crossEntry->clearUniqueTiles();
+						std::cout << "No matches found, rolling back [" << crossEntry->getId() << "]";
+					} else {
+						std::cout << "No matches found to roll back, giving up";
+						finished = true;
+					}
+					std::cout << std::endl;
+					break;
+				} else {
+					std::vector<std::string> matches;
+					for (auto jt = matches_set.begin(); jt != matches_set.end(); jt++) {
+						matches.push_back(*jt);
+					}
+					std::uniform_int_distribution<int> distribution(0, matches.size()-1);
+					int index = distribution(rng);
+					std::string match = matches[index];
+					entry->setComplete(true);
+					entry->setSolution(match);
+					std::cout << matches.size() << " matches found, attempting \"" << match << "\"";
 				}
-				entry->setComplete(true);
 			}
+			std::cout << std::endl;
 		}
 	}
-*/
+
 }
