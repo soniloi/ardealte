@@ -167,8 +167,8 @@ void Puzzle::discoverEntries() {
 			std::cout << "Seeking match for [" << entry->getId() << "] \"" << entry->getSolution() << "\" ";
 			if (!entry->isComplete()) {
 				std::string current = entry->getSolution();
-				std::set<std::string> matches_set = this->dictionary->getMatches(current, excludes);
-				if (matches_set.empty()) {
+				std::vector<std::string> matches = this->dictionary->getMatches(current, excludes);
+				if (matches.empty()) {
 					finished = false;
 					std::vector<Entry *> crossEntries = entry->getCrossings();
 					std::vector<Entry *> filteredCrossEntries;
@@ -192,10 +192,6 @@ void Puzzle::discoverEntries() {
 					std::cout << std::endl;
 					break;
 				} else {
-					std::vector<std::string> matches;
-					for (auto jt = matches_set.begin(); jt != matches_set.end(); jt++) {
-						matches.push_back(*jt);
-					}
 					std::uniform_int_distribution<int> distribution(0, matches.size()-1);
 					int index = distribution(rng);
 					std::string match = matches[index];
