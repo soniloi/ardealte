@@ -86,7 +86,7 @@ TEST(EntryTest, SetGetSolutionLengthNotMatch) {
 	ASSERT_DEATH({entry.setSolution("cat");}, ".");
 }
 
-TEST(EntryTest, ClearUniqueTilesAllUnique) {
+TEST(EntryTest, ClearUniqueTilesNoCrossings) {
 
 	Tile tile1(true);
 	tile1.setLetter('c');
@@ -106,7 +106,7 @@ TEST(EntryTest, ClearUniqueTilesAllUnique) {
 	ASSERT_EQ("...", entry.getSolution());
 }
 
-TEST(EntryTest, ClearUniqueTilesWithCrossing) {
+TEST(EntryTest, ClearUniqueTilesIncompleteCrossing) {
 
 	Tile tile1(true);
 	tile1.setLetter('c');
@@ -131,8 +131,38 @@ TEST(EntryTest, ClearUniqueTilesWithCrossing) {
 
 	acrossEntry.clearUniqueTiles();
 
+	ASSERT_EQ("...", acrossEntry.getSolution());
+	ASSERT_EQ(".m", downEntry.getSolution());
+}
+
+TEST(EntryTest, ClearUniqueTilesCompleteCrossing) {
+
+	Tile tile1(true);
+	tile1.setLetter('c');
+	Tile tile2(true);
+	tile2.setLetter('a');
+	Tile tile3(true);
+	tile3.setLetter('t');
+	Tile tile4(true);
+	tile4.setLetter('n');
+
+	std::vector<Tile *> acrossTiles;
+	acrossTiles.push_back(&tile1);
+	acrossTiles.push_back(&tile2);
+	acrossTiles.push_back(&tile3);
+
+	std::vector<Tile *> downTiles;
+	downTiles.push_back(&tile2);
+	downTiles.push_back(&tile4);
+
+	Entry acrossEntry(0, Direction::ACROSS, acrossTiles);
+	Entry downEntry(0, Direction::DOWN, downTiles);
+	downEntry.setComplete(true);
+
+	acrossEntry.clearUniqueTiles();
+
 	ASSERT_EQ(".a.", acrossEntry.getSolution());
-	ASSERT_EQ("am", downEntry.getSolution());
+	ASSERT_EQ("an", downEntry.getSolution());
 }
 
 TEST(EntryTest, GetCrossingsNoCrossings) {

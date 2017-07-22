@@ -50,7 +50,7 @@ std::string Puzzle::getEntriesStr() const {
 	std::stringstream ss;
 	for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
 		Entry * entry = (*it);
-		ss << entry->getId() << " (" << entry->getLength() << ")" << std::endl;
+		ss << entry->getId() << " (" << entry->getLength() << ") " << entry->getSolution() << std::endl;
 	}
 
 	return ss.str();
@@ -147,7 +147,7 @@ void Puzzle::discoverEntries() {
 	}
 
 	for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
-		std::cout << (*it) << " " << (*it)->getId() << " crossings: ";
+		std::cout << (*it) << " [" << (*it)->getId() << "] crossings: ";
 		std::vector<Entry *> crossEntries = (*it)->getCrossings();
 		for (auto jt = crossEntries.begin(); jt != crossEntries.end(); jt++) {
 			std::cout << (*jt)->getId() << " ";

@@ -53,7 +53,7 @@ void Entry::clearUniqueTiles() {
 	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
 		Tile * tile = (*it);
 		Entry * crossEntry = this->getCrossEntry(tile);
-		if (!crossEntry) {
+		if (!crossEntry || !crossEntry->isComplete()) {
 			tile->resetLetter();
 		}
 	}
