@@ -30,6 +30,7 @@ private:
 	void initBoard (bool * pattern);
 	void discoverEntries();
 	bool startsWord(unsigned int i, unsigned int j, Direction direction);
+	void createEntry(unsigned int entry_index, Direction direction, std::vector<Tile *> tiles);
 };
 
 #endif

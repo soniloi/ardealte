@@ -18,7 +18,7 @@ public:
 	unsigned int getDisplayNumber() const;
 	void setDisplayNumber(unsigned int display_number);
 	Entry * getEntry(Direction direction) const;
-	void setEntry(Entry * entry, Direction direction);
+	void setEntry(Direction direction, Entry * entry);
 	friend std::ostream& operator <<(std::ostream &stream, const Tile& tile);
 
 private:

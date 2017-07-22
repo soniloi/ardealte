@@ -38,7 +38,7 @@ Entry * Tile::getEntry(Direction direction) const {
 	return this->down_entry;
 }
 
-void Tile::setEntry(Entry * entry, Direction direction) {
+void Tile::setEntry(Direction direction, Entry * entry) {
 	if (direction == Direction::ACROSS) {
 		this->across_entry = entry;
 	} else {

@@ -110,6 +110,11 @@ void Puzzle::initBoard (bool * pattern) {
 	}
 }
 
+void Puzzle::createEntry(unsigned int entry_index, Direction direction, std::vector<Tile *> tiles) {
+	Entry * entry = new Entry(entry_index, direction, tiles);
+	this->entries.push_back(entry);
+}
+
 void Puzzle::discoverEntries() {
 	this->tiles.push_back(Puzzle::createClosedTileRow(this->actual_size)); // Bottom buffer row
 
@@ -127,8 +132,7 @@ void Puzzle::discoverEntries() {
 					entry_tiles.push_back(&tiles[i][k++]);
 				} while (tiles[i][k].isOpen());
 
-				Entry * entry = new Entry(current_entry_index, Direction::ACROSS, entry_tiles);
-				this->entries.push_back(entry);
+				this->createEntry(current_entry_index, Direction::ACROSS, entry_tiles);
 			}
 			if (this->startsWord(i, j, Direction::DOWN)) {
 				tiles[i][j].setDisplayNumber(current_entry_index);
@@ -140,8 +144,7 @@ void Puzzle::discoverEntries() {
 					entry_tiles.push_back(&tiles[k++][j]);
 				} while (tiles[k][j].isOpen());
 
-				Entry * entry = new Entry(current_entry_index, Direction::DOWN, entry_tiles);
-				this->entries.push_back(entry);
+				this->createEntry(current_entry_index, Direction::DOWN, entry_tiles);
 			}
 		}
 	}
