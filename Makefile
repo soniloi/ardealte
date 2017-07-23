@@ -12,7 +12,7 @@ CXX = clang++
 COMPILE = $(CXX) $(CFLAGS)
 LINK = $(CXX) $(LFLAGS)
 
-_OBJS = tile.o puzzle.o entry.o dictionary.o main.o
+_OBJS = tile.o puzzle.o entry.o simple_dictionary.o main.o
 OBJS = $(patsubst %, $(OBJDIR)/%,$(_OBJS))
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cc $(INCDIR)/%.h

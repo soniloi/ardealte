@@ -1,21 +1,21 @@
 #include <vector>
 
 #include "gtest/gtest.h"
-#include "ardealte/dictionary.h"
+#include "ardealte/simple_dictionary.h"
 
-TEST(DictionaryTest, LookupNotInserted) {
-	Dictionary dictionary;
+TEST(SimpleDictionaryTest, LookupNotInserted) {
+	SimpleDictionary dictionary;
 	ASSERT_FALSE(dictionary.lookup("tree"));
 }
 
-TEST(DictionaryTest, LookupInserted) {
-	Dictionary dictionary;
+TEST(SimpleDictionaryTest, LookupInserted) {
+	SimpleDictionary dictionary;
 	dictionary.insert("shrub");
 	ASSERT_TRUE(dictionary.lookup("shrub"));
 }
 
-TEST(DictionaryTest, GetMatchesNone) {
-	Dictionary dictionary;
+TEST(SimpleDictionaryTest, GetMatchesNone) {
+	SimpleDictionary dictionary;
 	dictionary.insert("shrub");
 	std::set<std::string> excludes;
 
@@ -23,8 +23,8 @@ TEST(DictionaryTest, GetMatchesNone) {
 	ASSERT_TRUE(matches.empty());
 }
 
-TEST(DictionaryTest, GetMatchesSingle) {
-	Dictionary dictionary;
+TEST(SimpleDictionaryTest, GetMatchesSingle) {
+	SimpleDictionary dictionary;
 	dictionary.insert("shrub");
 	dictionary.insert("berry");
 	std::set<std::string> excludes;
@@ -34,8 +34,8 @@ TEST(DictionaryTest, GetMatchesSingle) {
 	ASSERT_TRUE(std::find(matches.begin(), matches.end(), "shrub") != matches.end());
 }
 
-TEST(DictionaryTest, GetMatchesMultiple) {
-	Dictionary dictionary;
+TEST(SimpleDictionaryTest, GetMatchesMultiple) {
+	SimpleDictionary dictionary;
 	dictionary.insert("shrub");
 	dictionary.insert("berry");
 	dictionary.insert("shawl");
@@ -49,8 +49,8 @@ TEST(DictionaryTest, GetMatchesMultiple) {
 	ASSERT_TRUE(std::find(matches.begin(), matches.end(), "sheep") != matches.end());
 }
 
-TEST(DictionaryTest, GetMatchesExcludes) {
-	Dictionary dictionary;
+TEST(SimpleDictionaryTest, GetMatchesExcludes) {
+	SimpleDictionary dictionary;
 	dictionary.insert("shrub");
 	dictionary.insert("shawl");
 	dictionary.insert("sheep");

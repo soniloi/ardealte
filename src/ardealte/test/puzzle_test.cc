@@ -1,13 +1,13 @@
 #include <sstream>
 
 #include "gtest/gtest.h"
-#include "ardealte/dictionary.h"
+#include "ardealte/simple_dictionary.h"
 #include "ardealte/puzzle.h"
 
 TEST(PuzzleTest, InitAllFalse) {
 	const int size = 5;
 	bool * pattern = new bool[size * size]();
-	Dictionary dictionary;
+	SimpleDictionary dictionary;
 
 	Puzzle puzzle(size, pattern, &dictionary);
 
@@ -25,7 +25,7 @@ TEST(PuzzleTest, InitMixed) {
 		false, true, false,
 		true, true, true
 	};
-	Dictionary dictionary;
+	SimpleDictionary dictionary;
 
 	Puzzle puzzle(size, pattern, &dictionary);
 

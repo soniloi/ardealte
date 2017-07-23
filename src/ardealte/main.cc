@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "ardealte/dictionary.h"
+#include "ardealte/simple_dictionary.h"
 #include "ardealte/main.h"
 #include "ardealte/puzzle.h"
 
@@ -15,7 +15,7 @@ int main() {
 		false, false, true, true, true
 	};
 
-	Dictionary dictionary;
+	SimpleDictionary dictionary;
 	dictionary.insert("ear");
 	dictionary.insert("kin");
 	dictionary.insert("run");

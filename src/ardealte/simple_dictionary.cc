@@ -1,17 +1,17 @@
-#include "ardealte/dictionary.h"
+#include "ardealte/simple_dictionary.h"
 
-Dictionary::Dictionary() {
+SimpleDictionary::SimpleDictionary() {
 }
 
-void Dictionary::insert(std::string term) {
+void SimpleDictionary::insert(std::string term) {
 	this->terms.insert(term);
 }
 
-bool Dictionary::lookup(std::string term) const {
+bool SimpleDictionary::lookup(std::string term) const {
 	return this->terms.find(term) != this->terms.end();
 }
 
-std::vector<std::string> Dictionary::getMatches(std::string pattern, std::set<std::string> excludes) const {
+std::vector<std::string> SimpleDictionary::getMatches(std::string pattern, std::set<std::string> excludes) const {
 	std::vector<std::string> matches;
 	for (auto it = this->terms.begin(); it != this->terms.end(); it++) {
 		std::string term = (*it);
