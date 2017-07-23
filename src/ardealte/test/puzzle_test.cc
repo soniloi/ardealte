@@ -1,13 +1,24 @@
 #include <sstream>
 
+#include "gmock/gmock.h"
 #include "gtest/gtest.h"
-#include "ardealte/simple_dictionary.h"
+#include "ardealte/dictionary.h"
 #include "ardealte/puzzle.h"
+
+using ::testing::_;
+using ::testing::Return;
+
+class MockDictionary : public Dictionary {
+public:
+	MOCK_METHOD1(insert, void(std::string term));
+	MOCK_CONST_METHOD1(lookup, bool(std::string term));
+	MOCK_CONST_METHOD2(getMatches, std::vector<std::string>(std::string pattern, std::set<std::string> excludes));
+};
 
 TEST(PuzzleTest, InitAllFalse) {
 	const int size = 5;
 	bool * pattern = new bool[size * size]();
-	SimpleDictionary dictionary;
+	MockDictionary dictionary;
 
 	Puzzle puzzle(size, pattern, &dictionary);
 
@@ -25,7 +36,9 @@ TEST(PuzzleTest, InitMixed) {
 		false, true, false,
 		true, true, true
 	};
-	SimpleDictionary dictionary;
+	MockDictionary dictionary;
+	std::vector<std::string> matches;
+	EXPECT_CALL(dictionary, getMatches("..", _)).WillOnce(Return(matches));
 
 	Puzzle puzzle(size, pattern, &dictionary);
 
@@ -37,6 +50,6 @@ TEST(PuzzleTest, InitMixed) {
 }
 
 int main(int argc, char **argv) {
-	::testing::InitGoogleTest(&argc, argv);
+	::testing::InitGoogleMock(&argc, argv);
 	return RUN_ALL_TESTS();
 }
