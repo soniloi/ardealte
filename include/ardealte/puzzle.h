@@ -2,6 +2,7 @@
 #define PUZZLE_H
 
 #include <map>
+#include <random>
 #include <sstream>
 #include <vector>
 
