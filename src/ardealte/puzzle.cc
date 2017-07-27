@@ -25,6 +25,24 @@ Puzzle::~Puzzle() {
 	}
 }
 
+std::vector<std::vector<Tile *>> Puzzle::getVisibleTiles() const {
+
+	std::vector<std::vector<Tile *>> visible;
+
+	for (unsigned int i = Puzzle::buffer_size; i <= this->visible_size; ++i) {
+
+		std::vector<Tile *> row;
+
+		for (unsigned int j = Puzzle::buffer_size; j <= this->visible_size; ++j) {
+			row.push_back(tiles[i][j]);
+		}
+
+		visible.push_back(row);
+	}
+
+	return visible;
+}
+
 std::string Puzzle::getDisplayNumbersStr() const {
 
 	std::stringstream display;

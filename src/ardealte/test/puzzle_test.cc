@@ -15,21 +15,32 @@ public:
 	MOCK_CONST_METHOD2(getMatches, std::vector<std::string>(std::string pattern, std::set<std::string> excludes));
 };
 
-TEST(PuzzleTest, InitAllFalse) {
+TEST(PuzzleTest, GetVisibleTilesAllFalse) {
+
 	const int size = 5;
 	bool * pattern = new bool[size * size]();
 	MockDictionary dictionary;
 
 	Puzzle puzzle(size, pattern, &dictionary);
+	std::vector<std::vector<Tile *>> visible = puzzle.getVisibleTiles();
 
-	std::stringstream ss;
-	ss << puzzle;
+	ASSERT_EQ(size, visible.size());
+	for (unsigned int i = 0; i < visible.size(); ++i) {
+
+		std::vector<Tile *> row = visible[i];
+		ASSERT_EQ(size, row.size());
+
+		for (unsigned int j = 0; j < row.size(); ++j) {
+			Tile * tile = row[j];
+			ASSERT_FALSE(tile->isOpen());
+		}
+	}
+
 	delete [] pattern;
-
-	ASSERT_EQ("|||||||||||||||\n|||||||||||||||\n|||||||||||||||\n|||||||||||||||\n|||||||||||||||\n", ss.str());
 }
 
-TEST(PuzzleTest, InitMixed) {
+TEST(PuzzleTest, GetVisibleTilesMixed) {
+
 	const int size = 3;
 	bool * pattern = new bool[size * size] {
 		true, true, false,
@@ -41,6 +52,18 @@ TEST(PuzzleTest, InitMixed) {
 	EXPECT_CALL(dictionary, getMatches("..", _)).WillOnce(Return(matches));
 
 	Puzzle puzzle(size, pattern, &dictionary);
+	std::vector<std::vector<Tile *>> visible = puzzle.getVisibleTiles();
+
+	ASSERT_EQ(size, visible.size());
+	for (unsigned int i = 0; i < visible.size(); ++i) {
+		std::vector<Tile *> row = visible[i];
+		ASSERT_EQ(size, row.size());
+
+		for (unsigned int j = 0; j < row.size(); ++j) {
+			Tile * tile = row[j];
+			ASSERT_EQ(pattern[i * size + j], tile->isOpen());
+		}
+	}
 
 	std::stringstream ss;
 	ss << puzzle;
