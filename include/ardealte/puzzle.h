@@ -16,7 +16,6 @@ public:
 	Puzzle(unsigned int size, bool * pattern, Dictionary * dictionary);
 	~Puzzle();
 	std::vector<std::vector<Tile *>> getVisibleTiles() const;
-	std::string getDisplayNumbersStr() const;
 	std::vector<Entry *> getEntries() const;
 	friend std::ostream& operator <<(std::ostream &stream, const Puzzle& puzzle);
 

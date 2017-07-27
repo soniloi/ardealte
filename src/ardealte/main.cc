@@ -27,10 +27,28 @@ int main() {
 	dictionary.insert("tea");
 
 	Puzzle puzzle(size, pattern, &dictionary);
+
+	std::vector<std::vector<Tile *>> visible = puzzle.getVisibleTiles();
+	for (unsigned int i = 0; i < visible.size(); ++i) {
+		std::vector<Tile *> row = visible[i];
+		for (unsigned int j = 0; j < row.size(); ++j) {
+			Tile * tile = visible[i][j];
+			if (tile->isOpen()) {
+				std::cout << "[";
+				if (tile->getDisplayNumber() != 0) {
+					std::cout << tile->getDisplayNumber();
+				} else {
+					std::cout << " ";
+				}
+				std::cout << "]";
+			} else {
+				std::cout << "|||";
+			}
+		}
+		std::cout << std::endl;
+	}
+
 	std::vector<Entry *> entries = puzzle.getEntries();
-
-	std::cout << puzzle.getDisplayNumbersStr();
-
 	std::cout << std::setw(4) << "Id" << std::setw(4) << "Len" << std::setw(12) << "Solution" << std::setw(18) << "Crossings" << std::endl;
 	for (auto it = entries.begin(); it != entries.end(); it++) {
 		Entry * entry = (*it);

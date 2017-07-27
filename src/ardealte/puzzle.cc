@@ -43,32 +43,6 @@ std::vector<std::vector<Tile *>> Puzzle::getVisibleTiles() const {
 	return visible;
 }
 
-std::string Puzzle::getDisplayNumbersStr() const {
-
-	std::stringstream display;
-	for (unsigned int i = Puzzle::buffer_size; i <= this->visible_size; ++i) {
-
-		for (unsigned int j = Puzzle::buffer_size; j <= this->visible_size; ++j) {
-			Tile * tile = tiles[i][j];
-			if (tile->isOpen()) {
-				display << "[";
-				if (tile->getDisplayNumber() != 0) {
-					display << tile->getDisplayNumber();
-				} else {
-					display << " ";
-				}
-				display << "]";
-			} else {
-				display << "|||";
-			}
-		}
-
-		display << std::endl;
-	}
-
-	return display.str();
-}
-
 std::vector<Entry *> Puzzle::getEntries() const {
 	return this->entries;
 }
