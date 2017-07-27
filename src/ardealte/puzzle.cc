@@ -17,6 +17,12 @@ Puzzle::~Puzzle() {
 	for (auto it = this->entries.begin(); it != this->entries.end(); it++) {
 		delete (*it);
 	}
+	for (auto it = this->tiles.begin(); it != this->tiles.end(); it++) {
+		std::vector<Tile *> row = *it;
+		for (auto jt = row.begin(); jt != row.end(); jt++) {
+			delete (*jt);
+		}
+	}
 }
 
 std::string Puzzle::getDisplayNumbersStr() const {
@@ -25,11 +31,11 @@ std::string Puzzle::getDisplayNumbersStr() const {
 	for (unsigned int i = Puzzle::buffer_size; i <= this->visible_size; ++i) {
 
 		for (unsigned int j = Puzzle::buffer_size; j <= this->visible_size; ++j) {
-			Tile tile = tiles[i][j];
-			if (tile.isOpen()) {
+			Tile * tile = tiles[i][j];
+			if (tile->isOpen()) {
 				display << "[";
-				if (tile.getDisplayNumber() != 0) {
-					display << tile.getDisplayNumber();
+				if (tile->getDisplayNumber() != 0) {
+					display << tile->getDisplayNumber();
 				} else {
 					display << " ";
 				}
@@ -54,7 +60,7 @@ std::ostream& operator <<(std::ostream& stream, const Puzzle& puzzle) {
 	for (unsigned int i = Puzzle::buffer_size; i <= puzzle.visible_size; ++i) {
 
 		for (unsigned int j = Puzzle::buffer_size; j <= puzzle.visible_size; ++j) {
-			stream << puzzle.tiles[i][j];
+			stream << *(puzzle.tiles[i][j]);
 		}
 
 		stream << std::endl;
@@ -65,21 +71,21 @@ std::ostream& operator <<(std::ostream& stream, const Puzzle& puzzle) {
 
 bool Puzzle::startsWord(unsigned int i, unsigned int j, Direction direction) {
 
-	if (!this->tiles[i][j].isOpen()) {
+	if (!this->tiles[i][j]->isOpen()) {
 		return false;
 	}
 
 	if (direction == Direction::ACROSS) {
-		return !this->tiles[i][j-1].isOpen() && this->tiles[i][j+1].isOpen();
+		return !this->tiles[i][j-1]->isOpen() && this->tiles[i][j+1]->isOpen();
 	}
 
-	return !this->tiles[i-1][j].isOpen() && this->tiles[i+1][j].isOpen();
+	return !this->tiles[i-1][j]->isOpen() && this->tiles[i+1][j]->isOpen();
 }
 
-std::vector<Tile> Puzzle::createClosedTileRow(unsigned int size) {
-	std::vector<Tile> row;
+std::vector<Tile *> Puzzle::createClosedTileRow(unsigned int size) {
+	std::vector<Tile *> row;
 	for (unsigned int i = 0; i < size; ++i) {
-		row.push_back(Tile(false));
+		row.push_back(new Tile(false));
 	}
 	return row;
 }
@@ -89,16 +95,16 @@ void Puzzle::initBoard (bool * pattern) {
 
 	for (unsigned int i = 0; i < this->visible_size; ++i) {
 
-		std::vector<Tile> row;
-		row.push_back(Tile(false)); // Left buffer column
+		std::vector<Tile *> row;
+		row.push_back(new Tile(false)); // Left buffer column
 
 		for (unsigned int j = 0; j < this->visible_size; ++j) {
 
-			Tile tile(pattern[i * this->visible_size + j]);
+			Tile * tile = new Tile(pattern[i * this->visible_size + j]);
 			row.push_back(tile);
 		}
 
-		row.push_back(Tile(false)); // Right buffer column
+		row.push_back(new Tile(false)); // Right buffer column
 		this->tiles.push_back(row);
 	}
 }
@@ -119,26 +125,26 @@ void Puzzle::discoverEntries() {
 		for (unsigned int j = Puzzle::buffer_size; j <= this->visible_size; ++j) {
 			unsigned int current_entry_index = entry_index;
 			if (this->startsWord(i, j, Direction::ACROSS)) {
-				tiles[i][j].setDisplayNumber(current_entry_index);
+				tiles[i][j]->setDisplayNumber(current_entry_index);
 				entry_index = current_entry_index + 1 ;
 
 				std::vector<Tile *> entry_tiles;
 				unsigned int k = j;
 				do {
-					entry_tiles.push_back(&tiles[i][k++]);
-				} while (tiles[i][k].isOpen());
+					entry_tiles.push_back(tiles[i][k++]);
+				} while (tiles[i][k]->isOpen());
 
 				this->createEntry(current_entry_index, Direction::ACROSS, entry_tiles);
 			}
 			if (this->startsWord(i, j, Direction::DOWN)) {
-				tiles[i][j].setDisplayNumber(current_entry_index);
+				tiles[i][j]->setDisplayNumber(current_entry_index);
 				entry_index = current_entry_index + 1;
 
 				std::vector<Tile *> entry_tiles;
 				unsigned int k = i;
 				do {
-					entry_tiles.push_back(&tiles[k++][j]);
-				} while (tiles[k][j].isOpen());
+					entry_tiles.push_back(tiles[k++][j]);
+				} while (tiles[k][j]->isOpen());
 
 				this->createEntry(current_entry_index, Direction::DOWN, entry_tiles);
 			}

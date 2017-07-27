@@ -24,10 +24,10 @@ private:
 	Dictionary * dictionary;
 	unsigned int actual_size;
 	unsigned int visible_size;
-	std::vector<std::vector<Tile>> tiles;
+	std::vector<std::vector<Tile *>> tiles;
 	std::vector<Entry *> entries;
 
-	static std::vector<Tile> createClosedTileRow(unsigned int size);
+	static std::vector<Tile *> createClosedTileRow(unsigned int size);
 	void initBoard (bool * pattern);
 	void discoverEntries();
 	bool startsWord(unsigned int i, unsigned int j, Direction direction);
